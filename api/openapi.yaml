@@ -1,0 +1,193 @@
+openapi: 3.0.1
+info:
+  contact:
+    email: lampralexandros@gmail.com
+  description: This is a sample openApi document
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: https://wabli.netlify.app/
+  title: TempApi
+  version: 1.0.0
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+servers:
+- description: wabli-contest-42206
+  url: http://83.212.100.226:3004/v1
+security:
+- {}
+tags:
+- description: not yet ready
+  name: party
+paths:
+  /party:
+    post:
+      operationId: createparty
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/party'
+        description: data to be created
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/party'
+          description: successful operation
+      summary: Creates the data
+      tags:
+      - party
+      x-eov-operation-handler: controllers/PartyController
+  /party/{partyId}:
+    delete:
+      operationId: deleteparty
+      parameters:
+      - description: the Id parameter
+        explode: false
+        in: path
+        name: partyId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: successful operation
+      summary: Delete the element
+      tags:
+      - party
+      x-eov-operation-handler: controllers/PartyController
+    get:
+      operationId: getparty
+      parameters:
+      - description: the Id parameter
+        explode: false
+        in: path
+        name: partyId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/party'
+          description: successful operation
+      summary: Get the element
+      tags:
+      - party
+      x-eov-operation-handler: controllers/PartyController
+    put:
+      operationId: updateparty
+      parameters:
+      - description: the Id parameter
+        explode: false
+        in: path
+        name: partyId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/party'
+        description: data to be updated
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/party'
+          description: successful operation
+      summary: Updates the element
+      tags:
+      - party
+      x-eov-operation-handler: controllers/PartyController
+  /party/getAll:
+    get:
+      operationId: getAllparty
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/party'
+                type: array
+          description: successful operation
+      summary: Get all the data
+      tags:
+      - party
+      x-method-getAll: "true"
+      x-eov-operation-handler: controllers/PartyController
+components:
+  schemas:
+    party:
+      example:
+        partyDate: partyDate
+        partyTheme: partyTheme
+        partyTitle: partyTitle
+        partyParticipants:
+        - partyParticipants
+        - partyParticipants
+        partyHost: partyHost
+        partyTime: partyTime
+        partyDetails: partyDetails
+        _id: _id
+        partyAdress: partyAdress
+        partyImage:
+          data: data
+          name: name
+      properties:
+        _id:
+          type: string
+        partyDate:
+          type: string
+        partyDetails:
+          type: string
+        partyTheme:
+          type: string
+        partyHost:
+          type: string
+        partyImage:
+          $ref: '#/components/schemas/party_partyImage'
+        partyTime:
+          type: string
+        partyTitle:
+          type: string
+        partyAdress:
+          type: string
+        partyParticipants:
+          items:
+            type: string
+          type: array
+      required:
+      - partyAdress
+      - partyDate
+      - partyDetails
+      - partyHost
+      - partyImage
+      - partyParticipants
+      - partyTheme
+      - partyTime
+      - partyTitle
+      type: object
+    party_partyImage:
+      example:
+        data: data
+        name: name
+      properties:
+        data:
+          type: string
+        name:
+          type: string
+      type: object
+      x-isSchemaOnly: "true"
